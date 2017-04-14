@@ -24,7 +24,7 @@ SECRET_KEY = 'w&9-5v6xf((54+^lymz_)tk1k9!*b3mj#%5di&6z-xs*nmp00j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = [u'daivp.com']
+ALLOWED_HOSTS = [u'daivp.com',u'127.0.0.1']
 
 
 # Application definition

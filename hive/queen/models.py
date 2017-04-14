@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 # Create your models here.
 @python_2_unicode_compatible  # only if you need to support Python 2
-class Question(models.Model):
+class Abc(models.Model):
     question_text = models.CharField(max_length=200)
     def __str__(self):
         return self.question_text
@@ -15,7 +15,7 @@ class Question(models.Model):
 class Message(models.Model):
     title = models.CharField(max_length=200)
     cotent = models.CharField(max_length=200)
-    created_on = models.DateTimeField('created on')
+    created_on = models.DateTimeField('created')
     def __str__(self):
         return self.title
 
@@ -25,7 +25,7 @@ class MsgRecord(models.Model):
     plaform = models.CharField(max_length=200)
     token = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
-    sent_on = models.DateTimeField('sent on')
-    reach_on = models.DateTimeField('reach on')
+    sent_on = models.DateTimeField('sent')
+    reach_on = models.DateTimeField('reach')
     def __str__(self):
         return self.token

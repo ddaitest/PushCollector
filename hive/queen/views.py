@@ -1,21 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
-
 from django.shortcuts import render
+from .models import Message, MsgRecord
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello")
+	msg_list = Message.objects.order_by('created_on')[:5]
+	context = {'msg_list': msg_list}
+	return render(request, 'queen/index.html', context)
 
 def detail(request, abc):
-    return HttpResponse("detail = %s"%abc)
+	try:
+		msg = Message.objects.get(pk=abc)
+	except Message.DoesNotExist:
+		raise Http404("Message does not exist")
+	return render(request, 'queen/detail.html', {'msg': msg})
 
 def collect(request):
-    return HttpResponse("OK")
+	return HttpResponse("OK")
 
-def results(request, msg_id):
-    return HttpResponse("results = %s"%msg_id)
+def write(request):
+	return render(request, 'queen/write.html')
 
-def abc(request):
-    return HttpResponse("OK ABC")
+def send(request):
+	title = request.POST['title']
+	content = request.POST['content']
+	return HttpResponse("OK :"+title+content)

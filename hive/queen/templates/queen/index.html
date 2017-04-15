@@ -1,0 +1,9 @@
+{% if msg_list %}
+    <ul>
+    {% for msg in msg_list %}
+        <li><a href="{% url 'detail' msg.id %}/">{{ msg.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

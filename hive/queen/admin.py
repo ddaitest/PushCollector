@@ -6,4 +6,4 @@ from .models import Abc,Message,MsgRecord
 # Register your models here.
 admin.site.register(Abc)
 admin.site.register(Message)
-#admin.site.register(MsgRecord)
+admin.site.register(MsgRecord)

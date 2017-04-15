@@ -1,0 +1,6 @@
+<h1>{{ msg.title }}:{{ msg.content }}</h1>
+<ul>
+{% for record in msg.msgrecord_set.all %}
+    <li>{{record.plaform}},{{record.token}},{{record.phone}},{{record.sent_on}}</li>
+{% endfor %}
+</ul>

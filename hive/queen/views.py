@@ -18,7 +18,7 @@ def detail(request, abc):
 	return render(request, 'queen/detail.html', {'msg': msg})
 
 def collect(request):
-	return HttpResponse("OK")
+	return HttpResponse("Collect OK")
 
 def write(request):
 	return render(request, 'queen/write.html')

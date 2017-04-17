@@ -1,1 +1,4 @@
-hive/db.sqlite3
+*.pyc 
+settings.py 
+*.json 
+.DS_Store

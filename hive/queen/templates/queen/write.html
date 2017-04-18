@@ -20,7 +20,6 @@
 				用于测试发布Push Message. 将生成Message，然后推送到各个Push Server.
 			</p>
 			<form role="form" action="{% url 'send' %}" method="post">
-{% csrf_token %}
 	<div class="form-group">
 		<label for="title">Title</label>
 		<input type="text" class="form-control" id="title" name="title" placeholder="请输入标题">

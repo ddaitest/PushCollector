@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Message, MsgRecord
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(request):
@@ -18,11 +19,11 @@ def detail(request, abc):
 	return render(request, 'queen/detail.html', {'msg': msg})
 
 def collect(request):
-	return HttpResponse("Collect OK")
+	return HttpResponse("123 Collect OK")
 
 def write(request):
 	return render(request, 'queen/write.html')
-
+@csrf_exempt
 def send(request):
 	title = request.POST['title']
 	content = request.POST['content']

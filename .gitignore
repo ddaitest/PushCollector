@@ -2,4 +2,4 @@
 settings.py 
 *.json 
 .DS_Store
-abc.txt
+db.sqlite3

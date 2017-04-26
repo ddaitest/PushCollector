@@ -13,6 +13,9 @@ class Abc(models.Model):
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Message(models.Model):
+    #is_notification
+    #expied_on
+    #platform
     title = models.CharField(max_length=200)
     cotent = models.CharField(max_length=200)
     created_on = models.DateTimeField('created')
@@ -27,5 +30,13 @@ class MsgRecord(models.Model):
     phone = models.CharField(max_length=200)
     sent_on = models.DateTimeField('sent')
     reach_on = models.DateTimeField('reach')
+    def __str__(self):
+        return self.token
+
+@python_2_unicode_compatible  # only if you need to support Python 2
+class Token(models.Model):
+    token = models.CharField(max_length=200)
+    platform = models.CharField(max_length=200)
+    
     def __str__(self):
         return self.token

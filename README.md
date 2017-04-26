@@ -12,3 +12,7 @@ add url patterns. like this:
     ]
 
 
+- set db
+
+`./manage.py makemigrations queen`
+`./manage.py migrate`

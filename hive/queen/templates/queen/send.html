@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Result</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-3 column">
+            </div>
+            <div class="col-md-6 column">
+                <h2>
+                Result
+            </h2>
+                <p>
+                    用于测试发布Push Message. 将生成Message，然后推送到各个Push Server.
+                </p>
+                {% for send in send_list %}
+                    {% if send.status < 1 %}
+                        <div class="panel panel-success">
+                        <div class="panel-heading">
+                        <h3 class="panel-title">Success {{send.title}}</h3>
+                    </div>
+                    {% else %}
+                        <div class="panel panel-danger">
+                        <div class="panel-heading">
+                        <h3 class="panel-title">Fail {{send.title}}</h3>
+                    </div>
+                    {% endif %}
+                
+                    
+                    <div class="panel-body">
+                        {{send.message}}
+                    </div>
+                </div>
+                
+                {% endfor %}
+                
+            </div>
+            <div class="col-md-3 column">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

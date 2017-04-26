@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^(?P<abc>[0-9]+)/$', views.detail, name='detail'),
     url(r'^collect/?$', views.collect, name='collect'),
     url(r'^send/?$', views.send, name='send'),
+    url(r'^register/?$', views.register, name='register'),
 ]

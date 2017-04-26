@@ -1,41 +1,93 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8"> 
-	<title>send Message</title>
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>	
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-4 column">
-		</div>
-		<div class="col-md-4 column">
-			<h2>
-				Send Push Message
-			</h2>
-			<p>
-				用于测试发布Push Message. 将生成Message，然后推送到各个Push Server.
-			</p>
-			<form role="form" action="{% url 'send' %}" method="post">
-	<div class="form-group">
-		<label for="title">Title</label>
-		<input type="text" class="form-control" id="title" name="title" placeholder="请输入标题">
-	</div>
-	<div class="form-group">
-		<label for="content">Content</label>
-		<input type="text" class="form-control" id="content" name="content" placeholder="请输入内容">
-		<p class="help-block">TODO 将来可以选定第三方平台</p>
-	</div>
-	<button type="submit" class="btn btn-default" value="Vote" >发送</button>
-</form>
-		</div>
-		<div class="col-md-4 column">
-		</div>
-	</div>
-</div>
-</body>
-</html>
 
+<head>
+    <meta charset="utf-8">
+    <title>send Message</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-3 column">
+            </div>
+            <div class="col-md-6 column">
+                <h2>
+                Send Push Message
+            </h2>
+                <p>
+                    用于测试发布Push Message. 将生成Message，然后推送到各个Push Server.
+                </p>
+                <form role="form" action="{% url 'send' %}" method="post">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Title:</span>
+                            <input type="text" class="form-control" placeholder="请输入标题" aria-describedby="basic-addon1" id="title" name="title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Body:</span>
+                            <input type="text" class="form-control" placeholder="请输入内容" aria-describedby="basic-addon1" id="content" name="content">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Extra:</span>
+                            <input type="text" class="form-control" placeholder="请输入自定义信息" aria-describedby="basic-addon1" id="extra" name="extra">
+                        </div>
+                        <p class="help-block">输入自定义信息，用于透传消息</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">选择消息类型</label>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="notification" /> Notification
+                            </label>
+                            <label>
+                                <input type="checkbox" name="payload" /> Payload
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">选择第三方平台</label>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="mi"> 小米
+                            </label>
+                            <label>
+                                <input type="checkbox" name="huawei"> 华为
+                            </label>
+                            <label>
+                                <input type="checkbox" name="getui"> 个推
+                            </label>
+                            <label>
+                                <input type="checkbox" name="umeng"> 友盟
+                            </label>
+                            <label>
+                                <input type="checkbox" name="jpush"> 极光
+                            </label>
+                            <label>
+                                <input type="checkbox" name="tt"> 腾讯信鸽
+                            </label>
+                            <label>
+                                <input type="checkbox" name="baidu"> 百度
+                            </label>
+                            <label>
+                                <input type="checkbox" name="ali"> 阿里云
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" value="Vote"> 发 送 </button>
+                </form>
+            </div>
+            <div class="col-md-3 column">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

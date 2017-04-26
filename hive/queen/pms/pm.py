@@ -10,7 +10,7 @@ import os
 
 def register(post):
 	hw_token = post['hw']
-	obj, created = Token.objects.get_or_create(token=hw_token,default={platform='hw'})
+	obj, created = Token.objects.get_or_create(token=hw_token,default={platform:'hw'})
 	return json.dumps({'result':'ok','created':created})
 
 def push(post):

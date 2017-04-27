@@ -75,17 +75,21 @@ def push_mi(title, content, extra):
     return do_mi(title,content,extra,0)
 
 def do_mi(title, content, extra,payload):
-    Constants.use_official()
-    sender = APISender('jRmdPFa8mBprOYIQ6Hzbrw==')
-    # android message
-    message = PushMessage() \
-    .restricted_package_name('com.daivp.pushcollector') \
-    .title(title).description(content) \
-    .pass_through(payload).payload(extra)
-    recv = sender.broadcast_all(message.message_dict())
-    result={'title':'小米 '+('Notification' if payload==1 else 'Payload')}
-    result['status']= (0 if recv['result']=='ok' else 1)
-    result['message'] = str(recv)
+	result={'title':'小米 '+('Notification' if payload==1 else 'Payload')}
+	try:
+		Constants.use_official()
+        sender = APISender('jRmdPFa8mBprOYIQ6Hzbrw==')
+        # android message
+        message = PushMessage() \
+        .restricted_package_name('com.daivp.pushcollector') \
+        .title(title).description(content) \
+        .pass_through(payload).payload(extra)
+        recv = sender.broadcast_all(message.message_dict())   
+        result['status']= (0 if recv['result']=='ok' else 1)
+        result['message'] = str(recv)
+	except Exception as e:
+		result['status']= 1
+        result['message'] = e
     return result
 
 def push_gt(title, content, extra):

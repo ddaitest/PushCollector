@@ -75,7 +75,7 @@ def push_mi(title, content, extra):
     return do_mi(title,content,extra,0)
 
 def do_mi(title, content, extra,payload):
-    result={'title':'小米 '+('Notification' if payload==1 else 'Payload')}
+    result={'title':'小米 '+('Payload' if payload==1 else 'Notification')}
     try:
         Constants.use_official()
         sender = APISender('jRmdPFa8mBprOYIQ6Hzbrw==')

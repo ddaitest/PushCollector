@@ -9,9 +9,9 @@ from queen.models import Token
 import os
 
 def register(post):
-	hw_token = post['hw']
-	obj, created = Token.objects.get_or_create(token=hw_token,defaults={'platform':'hw'})
-	return json.dumps({'result':'ok','created':created})
+    hw_token = post['hw']
+    obj, created = Token.objects.get_or_create(token=hw_token,defaults={'platform':'hw'})
+    return json.dumps({'result':'ok','created':created})
 
 def push(post):
     title = post['title']
@@ -75,9 +75,9 @@ def push_mi(title, content, extra):
     return do_mi(title,content,extra,0)
 
 def do_mi(title, content, extra,payload):
-	result={'title':'小米 '+('Notification' if payload==1 else 'Payload')}
-	try:
-		Constants.use_official()
+    result={'title':'小米 '+('Notification' if payload==1 else 'Payload')}
+    try:
+        Constants.use_official()
         sender = APISender('jRmdPFa8mBprOYIQ6Hzbrw==')
         # android message
         message = PushMessage() \
@@ -87,8 +87,8 @@ def do_mi(title, content, extra,payload):
         recv = sender.broadcast_all(message.message_dict())   
         result['status']= (0 if recv['result']=='ok' else 1)
         result['message'] = str(recv)
-	except Exception as e:
-		result['status']= 1
+    except Exception as e:
+        result['status']= 1
         result['message'] = e
     return result
 
@@ -134,7 +134,7 @@ def do_hw(title, content, extra,payload):
     users = []
     users_qs = Token.objects.filter(platform='hw')
     for uq in users_qs:
-    	users.append(uq.token)
+        users.append(uq.token)
     recv = json.loads(send_hw(title, content, extra,token,payload,users))
     if recv.has_key('error') and (recv['error']=='invalid session'):
         #{"error":"invalid session"}

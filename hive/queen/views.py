@@ -36,3 +36,6 @@ def send(request):
 def register(request):
     log = pm.register(request.POST)
     return HttpResponse(log)
+
+def home(request):
+	return render(request, 'queen/home.html', {})

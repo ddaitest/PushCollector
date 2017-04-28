@@ -6,27 +6,24 @@
 
 ### 第三方推送原理
 
-
-```
-sequenceDiagram
-APP Server ->> Push Server: 发送总数=100
-Push Server->> Push Server: 验证.接受数=99
-Push Server->> Phone Tunnel: 下发数=40
-Phone Tunnel-->> Push Server: Ack送达，送达设备数=39
-Phone Tunnel->> App: 路由，送达APP数=30
-```
-
+![image](https://github.com/ddaitest/PushCollector/blob/master/res/flow.png?raw=true)
 
 ### 概念
-Android 推送分为**端内&端外**。
-- 当APP在前台，基于长连接，自己维护一套机制，为端内推送。
-- APP退到后台，短时间内可以“进程保活”。
-- APP到后台一点时间后，长连接断开，只能依靠第三方推送，即端外推送。
 
-Android Push分为**通知栏 (Notification)** 和**透传 (Payload)**，两者送达率不同。比如小米的文档中有描述。
+#### Notification & Payload
+Android Push分为**通知栏 (Notification)** 和**透传 (Payload)**。
+
+Notification不用app处理，由系统推送服务/共享推送通道处理。所以成功率高。
+Payload 还需要再路由到app，如果app不能启动，及失败。
+
+所以两者送达率不同。比如小米官方描述。
 > 在一些 Android 系统(如 MIUI)中,受到系统自启动管理设置的限制,应用不能在后台自启动。在这类系统中,如果在发送消息的时候对应的应用没有被启动,透传类消息将不能顺利送达。因此,对于对送达率要求很高的消息,建议尽量采用通知栏提醒的方式推送消息
 
-
+#### Broadcast & Token List & Tag
+调用Push API 发送消息的几种参数。
+- Broadcast - 发送到全部用户。
+- Token List - 指定设备。
+- Tag - 绑定部分设备为tag，用于批量发送。
 
 
 ### 第三方方案
@@ -80,17 +77,59 @@ Emui4.0及以上，Push广播有较高概率被限制，不被限制的机型如
 某平台做的统计，适当参考
 ![image](http://static.open-open.com/lib/uploadImg/20160711/20160711152842_976.jpg)
 
+华为push现升级为HMS,但不稳定和完善，比如：
+- 可能安装/升级华为移动服务，会弹窗。
+- 推送的api，不支持tag，只能指明user token。
+- 全部推送的api，官方不推荐使用，且将下线。
+- 推送每次最多1000设备。
+
 ### 合作厂商
 小米PUSH：
+![image](https://github.com/ddaitest/PushCollector/blob/master/res/mi_1.png?raw=true)
 
+个推：
+![image](https://github.com/ddaitest/PushCollector/blob/master/res/gt_1.png?raw=true)
+![image](https://github.com/ddaitest/PushCollector/blob/master/res/gt_2.png?raw=true)
+![image](https://github.com/ddaitest/PushCollector/blob/master/res/gt_3.png?raw=true)
+
+友盟：
+![image](https://github.com/ddaitest/PushCollector/blob/master/res/umeng_1.png?raw=true)
+![image](https://github.com/ddaitest/PushCollector/blob/master/res/umeng_2.png?raw=true)
+![image](https://github.com/ddaitest/PushCollector/blob/master/res/umeng_3.png?raw=true)
 
 ## 测试
+考虑的几个点
+- 手机类型：小米、华为 和 其他手机
+- App 正常打开情况
+- App 在后台
+- App 点back退出
+- App 被划杀
+- 手机清内存
+- 锁屏
+- 解锁后，停留在home
+- 主动启动相关App
 
-### 到达率
+---
+## Final Plan
+### A
+APP启动，选择最优SDK，激活，上报选择的 Token & User 信息。
 
+#### Good
+- Notification消息，可以广播。
 
+#### Bad
+- 只有一个通道存活。
 
+### B
+每次启动APP，选择最优SDK，激活所有SDK。上报 Tokens & User 信息。
 
+#### Good
+- 多通道同时存活。
+- Payload消息，由client去重。发所有平台。
+#### Bad
+- Notification消息，不能广播，只能 `by token list`。
+
+---
 ## 引用
 [国内Top500Android应用分析报告](http://www.open-open.com/lib/view/open1468222124208.html)
 
@@ -105,25 +144,3 @@ Emui4.0及以上，Push广播有较高概率被限制，不被限制的机型如
 [Android 第三方 Push 推送方案使用调查](https://github.com/android-cn/topics/issues/4#issuecomment-223264673)
 
 [华为官方：Push SDK-客户端常见问题](http://club.huawei.com/thread-10205061-1-1-2851.html)
-
-
-[华为官方：Push SDK-客户端常见问题](http://club.huawei.com/thread-10205061-1-1-2851.html)
-
-
-## Set up app in Django
-- set the project's setting.py
-add 'queen.apps.QueenConfig' into INSTALLED_APPS
-
-- set the project's urls.py
-add url patterns. like this:
-
-    urlpatterns = [
-    url(r'^queen/', include('queen.urls')),
-    url(r'^admin/', admin.site.urls),
-    ]
-
-
-- set db
-
-`./manage.py makemigrations queen`
-`./manage.py migrate`

@@ -143,19 +143,15 @@ VIVO【Funtouch OS_2.5】
 ### A
 APP启动，选择最优SDK，激活，上报选择的 Token & User 信息。
 
-#### Good
+- 只使用一个通道。
 - Notification消息，可以广播。
-
-#### Bad
 - 只有一个通道存活。
 
 ### B
 每次启动APP，选择最优SDK，激活所有SDK。上报 Tokens & User 信息。
 
-#### Good
 - 多通道同时存活。
 - Payload消息，由client去重。发所有平台。
-#### Bad
 - Notification消息，不能广播，只能 `by token list`。
 
 ---

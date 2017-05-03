@@ -66,6 +66,8 @@ def push(post):
             test.append(payload_gt(title+'_gt',content,extra))
         if platforms.count('umeng'):
             test.append(payload_umeng(title+'_umeng',content,extra))
+        if platforms.count('tt'):
+            test.append(payload_tt(title+'_tt',content,extra))
     return test
 
 def payload_mi(title, content, extra):

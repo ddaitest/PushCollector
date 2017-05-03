@@ -166,7 +166,18 @@ def push_jpush(title, content, extra):
     return {'title':'极光PSUH','status':1,'message':'not support'}
 
 def push_tt(title, content, extra):
-    return {'title':'腾讯信鸽','status':1,'message':'not support'}
+    return do_tt(title, content, extra,False)
+
+def payload_tt(title, content, extra):
+    return do_tt(title, content, extra,True)
+
+def do_tt(title, content, extra,payload):
+    #{"ret":"SUCCESS","data":{"task_id":"us46209149302982428600"}}
+    result={'title':'信鸽 '+('Payload' if payload else 'Notification')}
+    recv = json.loads(send_xg(title, content, extra,payload))
+    result['status']= (0 if (recv.has_key('ret_code') and recv['ret_code']==0) else 1)
+    result['message'] = str(recv)   
+    return result
 
 def push_baidu(title, content, extra):
     return {'title':'百度云','status':1,'message':'not support'}

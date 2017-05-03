@@ -19,6 +19,9 @@ GT_APP_ID = 'Pch3EpJM1AAm8PQUoVefSA'
 HW_APP_ID = '10883659'
 HW_CLIENT_SECRET = '9f30eac14b1199ec57cab6e18e230a89'
 
+#xinge
+XINGE_ACCESS_ID = '2100256523'
+XINGE_SECRET_KEY = '82e6c7ab131f83cef3f2970e2f95432d'
 
 def auth_gt():
     url = "https://restapi.getui.com/v1/"+GT_APP_ID+"/auth_sign";
@@ -93,17 +96,52 @@ def write_config(key,value):
     except:
         print 'exception'
 
+def send_xg(title, content, extra,payload):
+    url = 'http://openapi.xg.qq.com/v2/push/all_device'
+    #notification: {"content":"this is content","title":"this is title", "vibrate":1}
+    #payload: {"content":"this is content","title":"this is title"}
+    params = {}
+    params['access_id'] = XINGE_ACCESS_ID
+    params['timestamp'] = time.time()
+    if payload:
+        params['message_type'] = 2
+        params['message'] = json.dumps({"content":extra,"title":title})
+    else :
+        params['message_type'] = 1
+        params['message'] = json.dumps({"content":content,"title":title,"vibrate":1,'builder_id':0})
+    ks = sorted(params.keys())
+    paramStr = ''.join([('%s=%s' % (k, params[k])) for k in ks])
+    sign = md5('%s%s%s%s' % ('POST','openapi.xg.qq.com/v2/push/all_device',paramStr,XINGE_SECRET_KEY)).hexdigest()
+    params['sign'] = sign
+    r = requests.post(url,params)
+    return r.text
 
+def check_xg(pushid):
+    url = 'http://openapi.xg.qq.com/v2/push/get_msg_status'
+    #notification: {"content":"this is content","title":"this is title", "vibrate":1}
+    #payload: {"content":"this is content","title":"this is title"}
+    params = {}
+    params['access_id'] = XINGE_ACCESS_ID
+    params['timestamp'] = time.time()
+    params['push_id'] = json.dumps([{"push_id":pushid}])    
+    ks = sorted(params.keys())
+    paramStr = ''.join([('%s=%s' % (k, params[k])) for k in ks])
+    sign = md5('%s%s%s%s' % ('POST','openapi.xg.qq.com/v2/push/get_msg_status',paramStr,XINGE_SECRET_KEY)).hexdigest()
+    params['sign'] = sign
+    r = requests.post(url,params)
+    return r.text
 
 def main():
     #getui
     #token = 'CFkG7s5SwjV9x13OiTWa4LHpix9ySPZoIAbMJMondgt1us2Pnncmu1SlC05bOKMTP7Z14qrMWfHs2u6VAm1pow=='
     #huawei 
-    token = 'CFkJfdQXUJz/qdd8yVU/9V7bpRq63w+Q77podHRX3SvZHyZQpH2ifq6yG/ALXTn6l/ESvEYypso9/71Lr7gU0g=='
+    #token = 'CFkJfdQXUJz/qdd8yVU/9V7bpRq63w+Q77podHRX3SvZHyZQpH2ifq6yG/ALXTn6l/ESvEYypso9/71Lr7gU0g=='
     #print auth_gt()
     #print send_gt('a','b','c',token)
-    print send_hw('a','b','c',token,True)
+    #print send_hw('a','b','c',token,True)
     #print send_umeng('aaa','bbbb','ccc')
+    print send_xg('aaa','bb','cc',True)
+    #print check_xg('2546955582')
 
 
 if __name__ == '__main__':

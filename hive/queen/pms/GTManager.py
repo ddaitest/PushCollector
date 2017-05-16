@@ -60,7 +60,7 @@ def send_hw(title, content, extra,token,payload,users):
     postbody['cacheMode']='1'
     postbody['msgType']='1'
     postbody['userType']='1'
-    android = {'notification_title':title,'notification_content':content,'doings':2,'intent':'intent://com.qding.push/parser#Intent;scheme=QDPUSH;lS.abc='+extra+';end'}
+    android = {'notification_title':title,'notification_content':content,'doings':2,'intent':'intent://com.qding.push/parser#Intent;scheme=QDPUSH;S.abc='+extra+';end'}
     # android = {'notification_title':title,'notification_content':content,'doings':1,'extras':[{'eee':extra}]}
     # "{\"notification_title\":\"the good news!\",\"notification_content\":\"Price reduction!\",\"doings\":3,\"url\":\"vmall.com\"}";
     if payload:

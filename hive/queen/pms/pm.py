@@ -85,7 +85,7 @@ def do_mi(title, content, extra,payload):
         message = PushMessage() \
         .restricted_package_name('com.daivp.pushcollector') \
         .title(title).description(content) \
-        .pass_through(payload).payload(extra)
+        .pass_through(payload).payload(extra).extra(extra)
         recv = sender.broadcast_all(message.message_dict())   
         result['status']= (0 if recv['result']=='ok' else 1)
         result['message'] = str(recv)

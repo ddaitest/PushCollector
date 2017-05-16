@@ -60,7 +60,7 @@ def send_hw(title, content, extra,token,payload,users):
     postbody['cacheMode']='1'
     postbody['msgType']='1'
     postbody['userType']='1'
-    android = {'notification_title':title,'notification_content':content,'doings':1}
+    android = {'notification_title':title,'notification_content':content,'doings':1,'extras':[{'eee':extra}]}
     # "{\"notification_title\":\"the good news!\",\"notification_content\":\"Price reduction!\",\"doings\":3,\"url\":\"vmall.com\"}";
     if payload:
         postbody['message']=extra
@@ -136,11 +136,11 @@ def main():
     #token = 'CFkG7s5SwjV9x13OiTWa4LHpix9ySPZoIAbMJMondgt1us2Pnncmu1SlC05bOKMTP7Z14qrMWfHs2u6VAm1pow=='
     #huawei 
     #token = 'CFkJfdQXUJz/qdd8yVU/9V7bpRq63w+Q77podHRX3SvZHyZQpH2ifq6yG/ALXTn6l/ESvEYypso9/71Lr7gU0g=='
-    #print auth_gt()
+    print auth_hw()
     #print send_gt('a','b','c',token)
     #print send_hw('a','b','c',token,True)
     #print send_umeng('aaa','bbbb','ccc')
-    print send_xg('aaa','bb','cc',True)
+    #print send_xg('aaa','bb','cc',True)
     #print check_xg('2546955582')
 
 

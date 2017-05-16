@@ -73,7 +73,7 @@ def send_hw(title, content, extra,token,payload,users):
 
 def send_umeng(title, content, extra,payload):
     url = 'http://msg.umeng.com/api/send'
-    body = {'display_type':'notification','body':{'ticker':'提示文字','title':title,'text':content,'after_open':'go_app'}}
+    body = {'display_type':'notification','body':{'ticker':'提示文字','title':title,'text':content,'after_open':'go_custom','custom':extra}}
     if payload:
         body = {'display_type':'message','body':{'custom':extra}}
     postbody = {'appkey': UMENG_APP_KEY,'timestamp': int(time.time() * 1000),'type':'broadcast','payload':body}

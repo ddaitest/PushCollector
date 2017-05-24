@@ -8,6 +8,14 @@ from queen.models import Token
 
 import os
 
+#mi - office
+MI_APP_SECRET = 'BQJd4wq7tBlW9rnZ/PfkMw=='
+MI_PACKAGE = 'com.qding.community'
+#mi -dai
+#MI_APP_SECRET = 'jRmdPFa8mBprOYIQ6Hzbrw=='
+#MI_PACKAGE = 'com.daivp.pushcollector'
+
+
 def register(post):
     hw_token = post['hw']
     obj, created = Token.objects.get_or_create(token=hw_token,defaults={'platform':'hw'})
@@ -80,10 +88,10 @@ def do_mi(title, content, extra,payload):
     result={'title':'小米 '+('Payload' if payload==1 else 'Notification')}
     try:
         Constants.use_official()
-        sender = APISender('jRmdPFa8mBprOYIQ6Hzbrw==')
+        sender = APISender(MI_APP_SECRET)
         # android message
         message = PushMessage() \
-        .restricted_package_name('com.daivp.pushcollector') \
+        .restricted_package_name(MI_PACKAGE) \
         .title(title).description(content) \
         .pass_through(payload).payload(extra).extra(extra)
         recv = sender.broadcast_all(message.message_dict())   

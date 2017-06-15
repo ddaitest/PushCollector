@@ -20,11 +20,11 @@ GT_APPKEY = 'W8VFMontYp6NqclaB3UQJA'
 GT_APP_ID = 'Pch3EpJM1AAm8PQUoVefSA'
 
 #huawei - dai
-#HW_APP_ID = '10513650'
-#HW_CLIENT_SECRET = 'ukhno1k3nml2jhzc4m2k8g4r837xyrtu'
+HW_APP_ID = '10513650'
+HW_CLIENT_SECRET = 'ukhno1k3nml2jhzc4m2k8g4r837xyrtu'
 #huawei - dai
-HW_APP_ID = '10883659'
-HW_CLIENT_SECRET = '9f30eac14b1199ec57cab6e18e230a89'
+#HW_APP_ID = '10883659'
+#HW_CLIENT_SECRET = '9f30eac14b1199ec57cab6e18e230a89'
 
 #xinge
 XINGE_ACCESS_ID = '2100256523'
@@ -144,7 +144,7 @@ def main():
     #token = 'CFkG7s5SwjV9x13OiTWa4LHpix9ySPZoIAbMJMondgt1us2Pnncmu1SlC05bOKMTP7Z14qrMWfHs2u6VAm1pow=='
     #huawei 
     #token = 'CFkJfdQXUJz/qdd8yVU/9V7bpRq63w+Q77podHRX3SvZHyZQpH2ifq6yG/ALXTn6l/ESvEYypso9/71Lr7gU0g=='
-    print auth_hw()
+    print send_umeng('AAAaaa','BBBbbb','CCCccc',False)
     #print send_gt('a','b','c',token)
     #print send_hw('a','b','c',token,True)
     #print send_umeng('aaa','bbbb','ccc')

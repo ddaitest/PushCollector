@@ -8,10 +8,18 @@ from queen.models import Token
 
 import os
 
+#mi - office
+MI_APP_SECRET = 'BQJd4wq7tBlW9rnZ/PfkMw=='
+MI_PACKAGE = 'com.qding.community'
+#mi -dai
+#MI_APP_SECRET = 'jRmdPFa8mBprOYIQ6Hzbrw=='
+#MI_PACKAGE = 'com.daivp.pushcollector'
+
+
 def register(post):
-	hw_token = post['hw']
-	obj, created = Token.objects.get_or_create(token=hw_token,default={platform:'hw'})
-	return json.dumps({'result':'ok','created':created})
+    hw_token = post['hw']
+    obj, created = Token.objects.get_or_create(token=hw_token,defaults={'platform':'hw'})
+    return json.dumps({'result':'ok','created':created})
 
 def push(post):
     title = post['title']
@@ -66,6 +74,8 @@ def push(post):
             test.append(payload_gt(title+'_gt',content,extra))
         if platforms.count('umeng'):
             test.append(payload_umeng(title+'_umeng',content,extra))
+        if platforms.count('tt'):
+            test.append(payload_tt(title+'_tt',content,extra))
     return test
 
 def payload_mi(title, content, extra):
@@ -75,17 +85,21 @@ def push_mi(title, content, extra):
     return do_mi(title,content,extra,0)
 
 def do_mi(title, content, extra,payload):
-    Constants.use_official()
-    sender = APISender('jRmdPFa8mBprOYIQ6Hzbrw==')
-    # android message
-    message = PushMessage() \
-    .restricted_package_name('com.daivp.pushcollector') \
-    .title(title).description(content) \
-    .pass_through(payload).payload(extra)
-    recv = sender.broadcast_all(message.message_dict())
-    result={'title':'小米 '+('Notification' if payload==1 else 'Payload')}
-    result['status']= (0 if recv['result']=='ok' else 1)
-    result['message'] = str(recv)
+    result={'title':'小米 '+('Payload' if payload==1 else 'Notification')}
+    try:
+        Constants.use_official()
+        sender = APISender(MI_APP_SECRET)
+        # android message
+        message = PushMessage() \
+        .restricted_package_name(MI_PACKAGE) \
+        .title(title).description(content) \
+        .pass_through(payload).payload(extra).extra(extra)
+        recv = sender.broadcast_all(message.message_dict())   
+        result['status']= (0 if recv['result']=='ok' else 1)
+        result['message'] = str(recv)
+    except Exception as e:
+        result['status']= 1
+        result['message'] = e
     return result
 
 def push_gt(title, content, extra):
@@ -130,7 +144,7 @@ def do_hw(title, content, extra,payload):
     users = []
     users_qs = Token.objects.filter(platform='hw')
     for uq in users_qs:
-    	users.append(uq.token)
+        users.append(uq.token)
     recv = json.loads(send_hw(title, content, extra,token,payload,users))
     if recv.has_key('error') and (recv['error']=='invalid session'):
         #{"error":"invalid session"}
@@ -162,7 +176,18 @@ def push_jpush(title, content, extra):
     return {'title':'极光PSUH','status':1,'message':'not support'}
 
 def push_tt(title, content, extra):
-    return {'title':'腾讯信鸽','status':1,'message':'not support'}
+    return do_tt(title, content, extra,False)
+
+def payload_tt(title, content, extra):
+    return do_tt(title, content, extra,True)
+
+def do_tt(title, content, extra,payload):
+    #{"ret":"SUCCESS","data":{"task_id":"us46209149302982428600"}}
+    result={'title':'信鸽 '+('Payload' if payload else 'Notification')}
+    recv = json.loads(send_xg(title, content, extra,payload))
+    result['status']= (0 if (recv.has_key('ret_code') and recv['ret_code']==0) else 1)
+    result['message'] = str(recv)   
+    return result
 
 def push_baidu(title, content, extra):
     return {'title':'百度云','status':1,'message':'not support'}

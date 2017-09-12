@@ -21,7 +21,7 @@
                 <p>
                     用于测试发布Push Message. 将生成Message，然后推送到各个Push Server.
                 </p>
-                <form role="form" action="{% url 'send' %}" method="post">
+                <form role="form" action="{% url 'send' %}" method="post" target="_blank">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">Title:</span>
@@ -67,9 +67,7 @@
                             <label>
                                 <input type="checkbox" name="umeng"> 友盟
                             </label>
-                            <label>
-                                <input type="checkbox" name="jpush"> 极光
-                            </label>
+
                             <label>
                                 <input type="checkbox" name="tt"> 腾讯信鸽
                             </label>

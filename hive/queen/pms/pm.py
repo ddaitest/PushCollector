@@ -9,11 +9,11 @@ from queen.models import Token
 import os
 
 #mi - office
-MI_APP_SECRET = 'BQJd4wq7tBlW9rnZ/PfkMw=='
-MI_PACKAGE = 'com.qding.community'
+#MI_APP_SECRET = 'BQJd4wq7tBlW9rnZ/PfkMw=='
+#MI_PACKAGE = 'com.qding.community'
 #mi -dai
-#MI_APP_SECRET = 'jRmdPFa8mBprOYIQ6Hzbrw=='
-#MI_PACKAGE = 'com.daivp.pushcollector'
+MI_APP_SECRET = 'jRmdPFa8mBprOYIQ6Hzbrw=='
+MI_PACKAGE = 'com.daivp.pushcollector'
 
 
 def register(post):

@@ -10,18 +10,18 @@ import ConfigParser
 
 CONFIG_PATH = './queen/pms/token.ini'
 #umeng - office
-UMENG_APP_KEY = '54938e2efd98c5a805001212'
-UMENG_MASTER_SECRET = '7fjia8dx9dso1l6janpl5lcjxj8r4qao'
+#UMENG_APP_KEY = '54938e2efd98c5a805001212'
+#UMENG_MASTER_SECRET = '7fjia8dx9dso1l6janpl5lcjxj8r4qao'
 #umeng - DAI
-#UMENG_APP_KEY = '58ede1c6c62dca1bff0006b1'
-#UMENG_MASTER_SECRET = 'nrto7fxwroofycjg20rngnipex0iqxmv'
+UMENG_APP_KEY = '58ede1c6c62dca1bff0006b1'
+UMENG_MASTER_SECRET = 'nrto7fxwroofycjg20rngnipex0iqxmv'
 #GT
 GT_APPKEY = 'W8VFMontYp6NqclaB3UQJA'
 GT_APP_ID = 'Pch3EpJM1AAm8PQUoVefSA'
 
-#huawei - dai
-HW_APP_ID = '10513650'
-HW_CLIENT_SECRET = 'ukhno1k3nml2jhzc4m2k8g4r837xyrtu'
+#huawei - teemo
+HW_APP_ID = '100150425'
+HW_CLIENT_SECRET = '10feb362daf54802c426d3101a9d0fad'
 #huawei - dai
 #HW_APP_ID = '10883659'
 #HW_CLIENT_SECRET = '9f30eac14b1199ec57cab6e18e230a89'

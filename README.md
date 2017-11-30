@@ -179,7 +179,7 @@ VIVO【Funtouch OS_2.5】
 
 [微爱cto总结Android 端外推送到底有多烦？](https://juejin.im/post/57a19c012e958a0066715d0c)
 
-[推送“送达率”概念太模糊？友盟带你解读“送达率”背后的那些指标](http://blog.umeng.com/%E5%B7%A5%E7%A8%8B%E6%8A%80%E6%9C%AF/4541.html)
+[推送“送达率”概念太模糊？友盟带你解读“送达率”背后的那些指标](https://segmentfault.com/a/1190000002910101)
 
 [Android 第三方 Push 推送方案使用调查](https://github.com/android-cn/topics/issues/4#issuecomment-223264673)
 
